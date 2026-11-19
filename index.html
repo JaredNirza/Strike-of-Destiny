@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STRIKE OF DESTINY — 2D Dark-Fantasy Roguelike Survival Action Game</title>
+  <meta name="description" content="Official promotional and interactive showcase for Strike of Destiny — a 2D top-down dark-fantasy roguelike survival action game built in Unity & C# for PC (Windows)." />
+
+  <!-- Pixel Display & Clean Geometric Sans Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Animated Floating Embers & XP-Gem Particles -->
+  <canvas id="bg-particles" aria-hidden="true"></canvas>
+
+  <!-- Subtle Toggleable CRT Scanline Overlay -->
+  <div class="crt-overlay" aria-hidden="true"></div>
+
+  <!-- ======================================================================
+       2. STICKY NAVIGATION BAR
+       ====================================================================== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="nav-brand" aria-label="Strike of Destiny Home">
+        <!-- Custom Pixel Crest Logo SVG -->
+        <svg class="brand-crest" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+          <rect x="2" y="1" width="12" height="10" fill="#161924" />
+          <rect x="3" y="11" width="10" height="2" fill="#161924" />
+          <rect x="5" y="13" width="6" height="2" fill="#161924" />
+          <rect x="7" y="15" width="2" height="1" fill="#E63946" />
+          <!-- Crimson Shield Border -->
+          <rect x="2" y="1" width="12" height="1" fill="#E63946" />
+          <rect x="2" y="1" width="1" height="10" fill="#E63946" />
+          <rect x="13" y="1" width="1" height="10" fill="#E63946" />
+          <rect x="3" y="11" width="2" height="1" fill="#E63946" />
+          <rect x="11" y="11" width="2" height="1" fill="#E63946" />
+          <rect x="5" y="13" width="2" height="1" fill="#E63946" />
+          <rect x="9" y="13" width="2" height="1" fill="#E63946" />
+          <!-- Forged Gold Sword Emblem -->
+          <rect x="7" y="3" width="2" height="7" fill="#00F5D4" />
+          <rect x="5" y="8" width="6" height="1" fill="#FFB703" />
+          <rect x="7" y="9" width="2" height="3" fill="#FFB703" />
+          <rect x="7" y="2" width="2" height="1" fill="#FFFFFF" />
+        </svg>
+        <div class="brand-text">
+          <span class="brand-title">STRIKE OF <span>DESTINY</span></span>
+          <span class="brand-sub">PC • UNITY • ROGUELIKE</span>
+        </div>
+      </a>
+
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#trailer">Trailer</a></li>
+          <li><a href="#demo">Playable Demo</a></li>
+          <li><a href="#heroes">Heroes</a></li>
+          <li><a href="#systems">Systems &amp; Blacksmith</a></li>
+          <li><a href="#bestiary">Bestiary</a></li>
+          <li><a href="#controls">Controls</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="btn-crt-toggle" class="crt-toggle-btn" title="Toggle Retro CRT Scanlines">CRT: OFF</button>
+        <a href="#demo" class="btn btn-primary nav-cta">PLAY BROWSER DEMO</a>
+        <button id="nav-mobile-toggle" class="nav-mobile-toggle" aria-label="Toggle menu">≡</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ====================================================================
+         3A. HERO SECTION (ABOVE THE FOLD)
+         ==================================================================== -->
+    <section class="hero">
+      <div class="hero-backdrop" aria-hidden="true">
+        <div class="hero-moon"></div>
+        <!-- Pixel-stepped Gothic Mountain & Cathedral Silhouette -->
+        <svg class="hero-mountains" viewBox="0 0 1200 320" preserveAspectRatio="none">
+          <path fill="#141724" d="M0,320 L0,210 L80,210 L80,170 L140,170 L140,220 L240,220 L240,140 L270,140 L270,90 L300,90 L300,140 L330,140 L330,210 L460,210 L460,160 L540,160 L540,200 L660,200 L660,120 L700,120 L700,70 L730,70 L730,120 L770,120 L770,190 L910,190 L910,145 L990,145 L990,205 L1100,205 L1100,155 L1200,155 L1200,320 Z" />
+          <path fill="#0E1019" d="M0,320 L0,250 L160,250 L160,215 L290,215 L290,260 L480,260 L480,220 L620,220 L620,255 L820,255 L820,210 L960,210 L960,250 L1200,250 L1200,320 Z" />
+        </svg>
+        <div class="hero-grid-floor"></div>
+      </div>
+
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-badge-row">
+            <span class="genre-pill">2D Roguelike • Action • Survival • Fantasy • Adventure</span>
+            <span class="platform-pill">PC (WINDOWS) • FREE RELEASE</span>
+          </div>
+
+          <h1 class="hero-title">
+            STRIKE OF <span class="accent-crimson">DESTINY</span>
+          </h1>
+
+          <p class="hero-pitch">
+            <strong>Survive relentless waves of the undead, forge powerful upgrades, and become the ultimate hunter.</strong>
+            Master four distinct dark-fantasy heroes, draft game-breaking builds mid-run, and conquer cursed battlegrounds built in Unity &amp; C#.
+          </p>
+
+          <div class="hero-cta-row">
+            <a href="#demo" class="btn btn-primary">⚔ Launch Interactive Demo</a>
+            <a href="#trailer" class="btn btn-secondary">▶ Watch Trailer</a>
+          </div>
+
+          <div class="hero-stats-strip">
+            <div class="hero-stat-box">
+              <div class="hero-stat-val">4</div>
+              <div class="hero-stat-lbl">Hero Classes</div>
+            </div>
+            <div class="hero-stat-box">
+              <div class="hero-stat-val">5</div>
+              <div class="hero-stat-lbl">Blacksmith Forges</div>
+            </div>
+            <div class="hero-stat-box">
+              <div class="hero-stat-val">02:00</div>
+              <div class="hero-stat-lbl">Web Demo Loop</div>
+            </div>
+            <div class="hero-stat-box">
+              <div class="hero-stat-val">FREE</div>
+              <div class="hero-stat-lbl">No Microtx</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-art-card">
+          <div class="hero-art-canvas-wrap">
+            <canvas id="hero-diorama" aria-label="Animated pixel-art battle preview of Strike of Destiny"></canvas>
+          </div>
+          <div class="hero-art-caption">
+            <span><span class="live-dot"></span>LIVE PIXEL PREVIEW</span>
+            <span>UNITY 2D • C# ENGINE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         3B. OFFICIAL TRAILER THEATER SECTION
+         ==================================================================== -->
+    <section id="trailer" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">CINEMATIC SHOWCASE</span>
+          <h2 class="section-title">OFFICIAL TRAILER THEATER</h2>
+          <p class="section-subtitle">
+            Preview key combat moments from the Standard Campaign—from relentless undead waves and mid-run level-up drafts to boss showdowns and Village Trophies.
+          </p>
+        </div>
+
+        <div class="trailer-shell">
+          <div class="trailer-topbar">
+            <div class="trailer-label">
+              <span class="live-dot"></span> OFFICIAL GAMEPLAY TRAILER
+            </div>
+            <div class="trailer-meta">16:9 WIDESCREEN • READY FOR YOUTUBE / MP4 EMBED</div>
+          </div>
+
+          <!--
+            TO EMBED YOUR FINAL TRAILER VIDEO:
+            Replace the <canvas id="trailer-canvas"> below with either:
+            1) <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" ...></iframe>
+            2) <video src="assets/trailer.mp4" controls></video>
+          -->
+          <div class="trailer-viewport">
+            <canvas id="trailer-canvas" aria-label="Interactive gameplay trailer preview canvas"></canvas>
+            <div class="trailer-overlay-center" id="trailer-overlay">
+              <button class="trailer-big-play" id="trailer-big-play" aria-label="Play Gameplay Trailer">▶</button>
+              <div class="trailer-embed-note">INTERACTIVE PIXEL PREVIEW REEL • CLICK TO PLAY</div>
+            </div>
+          </div>
+
+          <div class="trailer-controls">
+            <button class="pixel-ctrl-btn" id="trailer-play-btn">PLAY</button>
+            <div class="trailer-progress-wrap" id="trailer-progress-wrap" title="Seek trailer timeline">
+              <div class="trailer-progress-fill" id="trailer-progress-fill"></div>
+            </div>
+            <span class="trailer-time" id="trailer-time">00:00 / 00:48</span>
+            <button class="pixel-ctrl-btn" id="trailer-mute-btn">AUDIO: ON</button>
+          </div>
+
+          <div class="trailer-thumbs">
+            <button class="trailer-thumb active" type="button">
+              <div class="thumb-preview"><canvas data-thumb-scene="0"></canvas></div>
+              <div class="thumb-title">01. Wave Survival</div>
+              <div class="thumb-time">00:00 — Horde Combat</div>
+            </button>
+            <button class="trailer-thumb" type="button">
+              <div class="thumb-preview"><canvas data-thumb-scene="1"></canvas></div>
+              <div class="thumb-title">02. Level-Up Choices</div>
+              <div class="thumb-time">00:12 — Build Drafting</div>
+            </button>
+            <button class="trailer-thumb" type="button">
+              <div class="thumb-preview"><canvas data-thumb-scene="2"></canvas></div>
+              <div class="thumb-title">03. Boss Encounters</div>
+              <div class="thumb-time">00:24 — Dread Lord</div>
+            </button>
+            <button class="trailer-thumb" type="button">
+              <div class="thumb-preview"><canvas data-thumb-scene="3"></canvas></div>
+              <div class="thumb-title">04. Village Trophies</div>
+              <div class="thumb-time">00:36 — Meta Progress</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         4. INTERACTIVE PLAYABLE WEB DEMO (HTML5 CANVAS MINI-GAME)
+         ==================================================================== -->
+    <section id="demo" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">PLAYABLE IN-BROWSER MINI-GAME</span>
+          <h2 class="section-title">SURVIVE THE 2-MINUTE DEMO</h2>
+          <p class="section-subtitle">
+            Pick one of the four official heroes, survive escalating waves of undead for <strong>02:00</strong>, draft level-up upgrades, and slay the Stage Boss. Earned Gold &amp; Kills sync directly with the Blacksmith &amp; Bestiary below!
+          </p>
+        </div>
+
+        <div class="demo-wrapper">
+          <!-- Pre-Run Hero Selector -->
+          <div class="demo-hero-selector" role="radiogroup" aria-label="Select Playable Hero">
+            <button class="demo-hero-pick selected" data-hero="kaito" type="button">
+              <div class="demo-hero-avatar"><canvas data-sprite="kaito" data-scale="2"></canvas></div>
+              <div>
+                <div class="demo-hero-name">Kaito</div>
+                <div class="demo-hero-role">Shadow Shinobi</div>
+                <div class="demo-hero-perk">High speed • Fast kunais</div>
+              </div>
+            </button>
+            <button class="demo-hero-pick" data-hero="gareth" type="button">
+              <div class="demo-hero-avatar"><canvas data-sprite="gareth" data-scale="2"></canvas></div>
+              <div>
+                <div class="demo-hero-name">Sir Gareth</div>
+                <div class="demo-hero-role">Iron Paladin</div>
+                <div class="demo-hero-perk">High HP • Sweeping slash</div>
+              </div>
+            </button>
+            <button class="demo-hero-pick" data-hero="vex" type="button">
+              <div class="demo-hero-avatar"><canvas data-sprite="vex" data-scale="2"></canvas></div>
+              <div>
+                <div class="demo-hero-name">Doctor Vex</div>
+                <div class="demo-hero-role">Plague Alchemist</div>
+                <div class="demo-hero-perk">Potion vials • Poison pools</div>
+              </div>
+            </button>
+            <button class="demo-hero-pick" data-hero="zephyr" type="button">
+              <div class="demo-hero-avatar"><canvas data-sprite="zephyr" data-scale="2"></canvas></div>
+              <div>
+                <div class="demo-hero-name">Zephyr</div>
+                <div class="demo-hero-role">Storm Warden</div>
+                <div class="demo-hero-perk">Chaining lightning bolts</div>
+              </div>
+            </button>
+          </div>
+
+          <!-- Game Cabinet -->
+          <div class="demo-cabinet">
+            <!-- Dark-Themed HUD -->
+            <div class="demo-hud">
+              <div class="hud-bar-group">
+                <div class="hud-label-row">
+                  <span>HEALTH</span>
+                  <span id="hud-hp-text">100 / 100</span>
+                </div>
+                <div class="hud-track">
+                  <div class="hud-fill-hp" id="hud-hp-fill"></div>
+                </div>
+              </div>
+
+              <div class="hud-bar-group">
+                <div class="hud-label-row">
+                  <span>EXPERIENCE</span>
+                  <span id="hud-xp-text">0 / 45</span>
+                </div>
+                <div class="hud-track">
+                  <div class="hud-fill-xp" id="hud-xp-fill"></div>
+                </div>
+              </div>
+
+              <div class="hud-timer-box">
+                <div class="hud-timer-val" id="hud-timer">02:00</div>
+                <div class="hud-timer-sub" id="hud-wave-label">WAVE 1 • UNDEAD</div>
+              </div>
+
+              <div class="hud-counters">
+                <span class="hud-pill lvl" id="hud-level">LVL 1</span>
+                <span class="hud-pill gold" id="hud-gold">0G</span>
+                <span class="hud-pill combo" id="hud-combo">0x COMBO</span>
+              </div>
+            </div>
+
+            <!-- HTML5 Canvas Stage + Modals -->
+            <div class="demo-stage">
+              <canvas id="game-canvas" aria-label="Strike of Destiny Playable Survival Demo Canvas"></canvas>
+
+              <!-- Start Overlay -->
+              <div class="demo-overlay" id="demo-overlay-start">
+                <h3 class="demo-overlay-title">READY TO ENTER THE ARENA?</h3>
+                <p class="demo-overlay-sub">
+                  Selected Hero: <strong id="start-hero-label" style="color:var(--cyan);">Kaito — Shadow Shinobi (Shadow Kunai)</strong><br />
+                  Move with <strong>WASD</strong>, Aim &amp; Attack with <strong>Mouse</strong>, Dodge with <strong>Spacebar</strong>, Toggle Radar with <strong>M</strong>.
+                </p>
+                <button class="btn btn-primary" id="btn-start-demo" type="button">⚔ START 02:00 SURVIVAL RUN</button>
+              </div>
+
+              <!-- Level-Up Pause Modal -->
+              <div class="demo-overlay hidden" id="demo-overlay-levelup">
+                <h3 class="demo-overlay-title levelup">LEVEL UP! CHOOSE AN UPGRADE</h3>
+                <p class="demo-overlay-sub">Combat is paused. Select 1 of 3 randomized Weapons, Stat Boosts, or Relic Trinkets:</p>
+                <div class="levelup-cards" id="levelup-cards"></div>
+              </div>
+
+              <!-- Victory / Game Over Modal -->
+              <div class="demo-overlay hidden" id="demo-overlay-end">
+                <h3 class="demo-overlay-title victory" id="end-overlay-title">VICTORY!</h3>
+                <p class="demo-overlay-sub" id="end-overlay-sub"></p>
+                <div class="run-summary-grid" id="end-run-stats"></div>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+                  <button class="btn btn-primary" id="btn-restart-demo" type="button">PLAY AGAIN</button>
+                  <button class="btn btn-secondary" id="btn-switch-hero" type="button">SWITCH HERO</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Controls & Audio Bar -->
+            <div class="demo-footer-bar">
+              <div class="demo-key-hints">
+                <span><span class="kbd">WASD</span>Move</span>
+                <span><span class="kbd">MOUSE</span>Aim / Attack</span>
+                <span><span class="kbd">SPACE</span>Dodge Dash</span>
+                <span><span class="kbd">M</span>Mini-Radar</span>
+              </div>
+              <div class="demo-toggles">
+                <button class="btn btn-sm btn-ghost" id="btn-demo-autofire" type="button">AUTO-FIRE: OFF</button>
+                <button class="btn btn-sm btn-cyan" id="btn-demo-radar" type="button">RADAR (M): ON</button>
+                <button class="btn btn-sm btn-cyan" id="btn-demo-sfx" type="button">SFX: ON</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         5. PLAYABLE HERO CLASSES SHOWCASE
+         ==================================================================== -->
+    <section id="heroes" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">CHOOSE YOUR HUNTER</span>
+          <h2 class="section-title">PLAYABLE HERO CLASSES</h2>
+          <p class="section-subtitle">
+            Four distinct dark-fantasy warriors, each engineered with signature weapons, unique stat profiles, and specialized survival playstyles.
+          </p>
+        </div>
+
+        <div class="heroes-grid">
+          <!-- Kaito -->
+          <article class="pixel-card hero-class-card" data-accent="cyan">
+            <div class="hero-sprite-frame">
+              <span class="hero-class-tag">AGILITY / ASSASSIN</span>
+              <canvas data-sprite="kaito" data-scale="6"></canvas>
+            </div>
+            <h3 class="hero-card-name">Kaito</h3>
+            <div class="hero-card-title" style="color:var(--cyan);">Shadow Shinobi</div>
+            <div class="hero-weapon-box">
+              <strong>SIGNATURE WEAPON: SHARP KUNAIS</strong>
+              Rapid-fire throwing blades that shred approaching lines with high mobility.
+            </div>
+            <div class="stat-bars">
+              <div class="stat-row"><span>HEALTH</span><div class="stat-track"><div class="stat-fill" style="width:60%;background:var(--crimson);"></div></div><span>60</span></div>
+              <div class="stat-row"><span>SPEED</span><div class="stat-track"><div class="stat-fill" style="width:95%;background:var(--cyan);"></div></div><span>95</span></div>
+              <div class="stat-row"><span>DAMAGE</span><div class="stat-track"><div class="stat-fill" style="width:76%;background:var(--gold);"></div></div><span>76</span></div>
+              <div class="stat-row"><span>RANGE</span><div class="stat-track"><div class="stat-fill" style="width:82%;background:var(--violet-light);"></div></div><span>82</span></div>
+            </div>
+            <p class="hero-playstyle">
+              Bonus movement speed and agile dodging specialist—excels at kiting large undead hordes and threading lethal gaps.
+            </p>
+            <button class="btn btn-sm btn-cyan" data-play-hero="kaito" type="button">PLAY AS KAITO</button>
+          </article>
+
+          <!-- Sir Gareth -->
+          <article class="pixel-card hero-class-card" data-accent="gold">
+            <div class="hero-sprite-frame">
+              <span class="hero-class-tag">VANGUARD / TANK</span>
+              <canvas data-sprite="gareth" data-scale="6"></canvas>
+            </div>
+            <h3 class="hero-card-name">Sir Gareth</h3>
+            <div class="hero-card-title" style="color:var(--gold);">Iron Paladin</div>
+            <div class="hero-weapon-box">
+              <strong>SIGNATURE WEAPON: HEAVY SWORDS</strong>
+              Wide sweeping steel arcs that cleave multiple enemies and knock back swarms.
+            </div>
+            <div class="stat-bars">
+              <div class="stat-row"><span>HEALTH</span><div class="stat-track"><div class="stat-fill" style="width:96%;background:var(--crimson);"></div></div><span>96</span></div>
+              <div class="stat-row"><span>SPEED</span><div class="stat-track"><div class="stat-fill" style="width:58%;background:var(--cyan);"></div></div><span>58</span></div>
+              <div class="stat-row"><span>DAMAGE</span><div class="stat-track"><div class="stat-fill" style="width:90%;background:var(--gold);"></div></div><span>90</span></div>
+              <div class="stat-row"><span>RANGE</span><div class="stat-track"><div class="stat-fill" style="width:52%;background:var(--violet-light);"></div></div><span>52</span></div>
+            </div>
+            <p class="hero-playstyle">
+              Bonus maximum health built for frontline defensive combat—holds ground against fierce waves and absorbs heavy boss blows.
+            </p>
+            <button class="btn btn-sm btn-gold" data-play-hero="gareth" type="button">PLAY AS SIR GARETH</button>
+          </article>
+
+          <!-- Doctor Vex -->
+          <article class="pixel-card hero-class-card" data-accent="poison">
+            <div class="hero-sprite-frame">
+              <span class="hero-class-tag">AREA CONTROL / DOT</span>
+              <canvas data-sprite="vex" data-scale="6"></canvas>
+            </div>
+            <h3 class="hero-card-name">Doctor Vex</h3>
+            <div class="hero-card-title" style="color:var(--poison);">Plague Alchemist</div>
+            <div class="hero-weapon-box">
+              <strong>SIGNATURE WEAPON: GLASS POTION VIALS</strong>
+              Shatters on impact to leave bubbling toxic zones that melt pursuing undead.
+            </div>
+            <div class="stat-bars">
+              <div class="stat-row"><span>HEALTH</span><div class="stat-track"><div class="stat-fill" style="width:72%;background:var(--crimson);"></div></div><span>72</span></div>
+              <div class="stat-row"><span>SPEED</span><div class="stat-track"><div class="stat-fill" style="width:74%;background:var(--cyan);"></div></div><span>74</span></div>
+              <div class="stat-row"><span>DAMAGE</span><div class="stat-track"><div class="stat-fill" style="width:82%;background:var(--gold);"></div></div><span>82</span></div>
+              <div class="stat-row"><span>RANGE</span><div class="stat-track"><div class="stat-fill" style="width:78%;background:var(--violet-light);"></div></div><span>78</span></div>
+            </div>
+            <p class="hero-playstyle">
+              Master of area poison damage over time—lures hordes through overlapping acid pools for devastating sustained crowd control.
+            </p>
+            <button class="btn btn-sm btn-secondary" data-play-hero="vex" type="button">PLAY AS DOCTOR VEX</button>
+          </article>
+
+          <!-- Zephyr -->
+          <article class="pixel-card hero-class-card" data-accent="violet">
+            <div class="hero-sprite-frame">
+              <span class="hero-class-tag">ARCANE / CHAIN DPS</span>
+              <canvas data-sprite="zephyr" data-scale="6"></canvas>
+            </div>
+            <h3 class="hero-card-name">Zephyr</h3>
+            <div class="hero-card-title" style="color:var(--violet-light);">Storm Warden</div>
+            <div class="hero-weapon-box">
+              <strong>SIGNATURE WEAPON: CHAIN LIGHTNING</strong>
+              High-voltage electric bolts that arc instantaneously across clustered enemies.
+            </div>
+            <div class="stat-bars">
+              <div class="stat-row"><span>HEALTH</span><div class="stat-track"><div class="stat-fill" style="width:68%;background:var(--crimson);"></div></div><span>68</span></div>
+              <div class="stat-row"><span>SPEED</span><div class="stat-track"><div class="stat-fill" style="width:80%;background:var(--cyan);"></div></div><span>80</span></div>
+              <div class="stat-row"><span>DAMAGE</span><div class="stat-track"><div class="stat-fill" style="width:88%;background:var(--gold);"></div></div><span>88</span></div>
+              <div class="stat-row"><span>RANGE</span><div class="stat-track"><div class="stat-fill" style="width:94%;background:var(--violet-light);"></div></div><span>94</span></div>
+            </div>
+            <p class="hero-playstyle">
+              Commands electric attacks and high-voltage lightning abilities—obliterates dense enemy packs from safe mid-to-long range.
+            </p>
+            <button class="btn btn-sm btn-secondary" data-play-hero="zephyr" type="button">PLAY AS ZEPHYR</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         6. CORE GAMEPLAY LOOP & PROGRESSION SYSTEMS (BLACKSMITH)
+         ==================================================================== -->
+    <section id="systems" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">ROGUELIKE PROGRESSION</span>
+          <h2 class="section-title">CORE LOOP &amp; VILLAGE BLACKSMITH</h2>
+          <p class="section-subtitle">
+            Every run feeds permanent power. Explore the 10-step survival loop, inspect mid-run level-up categories, and test-forge meta-upgrades in the interactive Blacksmith Simulator.
+          </p>
+        </div>
+
+        <!-- 10-Step Core Gameplay Loop Timeline -->
+        <div class="loop-timeline-wrap">
+          <div class="loop-steps" id="loop-steps"></div>
+          <div class="pixel-card loop-detail-panel">
+            <div>
+              <div class="loop-detail-title" id="loop-detail-title">STEP 01 — SELECT HERO</div>
+              <p class="loop-detail-desc" id="loop-detail-desc"></p>
+            </div>
+            <a href="#demo" class="btn btn-sm btn-primary">TRY THE LOOP LIVE</a>
+          </div>
+        </div>
+
+        <!-- Two-Column Split: Upgrade Previewer & Village Blacksmith Simulator -->
+        <div class="systems-split">
+          <!-- Interactive Level-Up Upgrade Previewer -->
+          <div class="pixel-card" style="padding:22px;">
+            <h3 class="panel-heading">LEVEL-UP UPGRADE PREVIEWER</h3>
+            <p class="panel-sub">Inspect the three mid-run upgrade pools presented whenever your XP bar fills.</p>
+
+            <div class="upgrade-tabs">
+              <button class="tab-btn upgrade-tab-btn active" data-tab="weapons" type="button">⚔ WEAPONS</button>
+              <button class="tab-btn upgrade-tab-btn" data-tab="stats" type="button">✦ STATS</button>
+              <button class="tab-btn upgrade-tab-btn" data-tab="relics" type="button">⏳ RELIC TRINKETS</button>
+            </div>
+
+            <div class="upgrade-list" id="upgrade-preview-list"></div>
+          </div>
+
+          <!-- Interactive Village Blacksmith Simulator -->
+          <div class="pixel-card blacksmith-panel">
+            <h3 class="panel-heading">VILLAGE BLACKSMITH SIMULATOR</h3>
+            <p class="panel-sub">Spend sample gold (or gold looted from the playable demo!) to test-purchase permanent meta-upgrades. Forged bonuses carry straight into your browser demo runs!</p>
+
+            <div class="blacksmith-wallet">
+              <div>
+                <div style="font-family:var(--font-pixel-alt);font-size:0.64rem;color:var(--text-muted);">AVAILABLE TREASURY</div>
+                <div class="wallet-amount" id="bs-gold-amount">1,200 GOLD</div>
+              </div>
+              <div class="wallet-actions">
+                <button class="btn btn-sm btn-gold" id="bs-add-gold" type="button">+500G SAMPLE</button>
+                <button class="btn btn-sm btn-ghost" id="bs-reset" type="button">RESET</button>
+              </div>
+            </div>
+
+            <div class="forge-list" id="bs-forge-list"></div>
+
+            <div class="blacksmith-summary" id="bs-bonus-summary"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         7. MONSTER BESTIARY, SPECIAL LEVEL & VILLAGE TROPHIES
+         ==================================================================== -->
+    <section id="bestiary" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">UNDEAD CODEX &amp; ACHIEVEMENTS</span>
+          <h2 class="section-title">BESTIARY, SECRET STAGE &amp; TROPHIES</h2>
+          <p class="section-subtitle">
+            Study the cursed legions stalking the campaign, uncover the bonus challenge stage, and track your unlocked Village Trophies.
+          </p>
+        </div>
+
+        <!-- Bestiary Filter Bar -->
+        <div class="filter-bar">
+          <button class="tab-btn bestiary-filter-btn active" data-filter="all" type="button">ALL FOES</button>
+          <button class="tab-btn bestiary-filter-btn" data-filter="melee" type="button">MELEE HORDE</button>
+          <button class="tab-btn bestiary-filter-btn" data-filter="fast" type="button">FAST FLANKERS</button>
+          <button class="tab-btn bestiary-filter-btn" data-filter="ranged" type="button">RANGED</button>
+          <button class="tab-btn bestiary-filter-btn" data-filter="boss" type="button">STAGE BOSS</button>
+        </div>
+
+        <!-- Monster Bestiary Grid -->
+        <div class="bestiary-grid">
+          <!-- Horde Zombies -->
+          <article class="pixel-card monster-card" data-category="melee">
+            <div class="monster-sprite-box">
+              <span class="threat-badge">THREAT: LOW</span>
+              <canvas data-sprite="zombie" data-scale="5"></canvas>
+            </div>
+            <h3 class="monster-name">Horde Zombies</h3>
+            <p class="monster-lore">
+              Relentless risen villagers bound by necromantic curses. Individually slow, they overwhelm careless hunters through sheer numbers and encirclement.
+            </p>
+            <div class="monster-meta">
+              <div class="monster-weakness"><strong>WEAKNESS:</strong> Poison Pools &amp; Sweeping Cleaves</div>
+              <div class="defeated-tracker">
+                <span>DEFEATED COUNT</span>
+                <span class="defeated-count" data-defeated="zombie">142</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Rabid Hunting Hounds -->
+          <article class="pixel-card monster-card" data-category="fast">
+            <div class="monster-sprite-box">
+              <span class="threat-badge">THREAT: MEDIUM</span>
+              <canvas data-sprite="hound" data-scale="5"></canvas>
+            </div>
+            <h3 class="monster-name">Rabid Hunting Hounds</h3>
+            <p class="monster-lore">
+              Blight-twisted beasts that sprint at ferocious speed to break your formation and punish slow reaction times between dodges.
+            </p>
+            <div class="monster-meta">
+              <div class="monster-weakness"><strong>WEAKNESS:</strong> Chain Lightning &amp; Dash Kiting</div>
+              <div class="defeated-tracker">
+                <span>DEFEATED COUNT</span>
+                <span class="defeated-count" data-defeated="hound">68</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Skeleton Archers -->
+          <article class="pixel-card monster-card" data-category="ranged">
+            <div class="monster-sprite-box">
+              <span class="threat-badge">THREAT: HIGH</span>
+              <canvas data-sprite="archer" data-scale="5"></canvas>
+            </div>
+            <h3 class="monster-name">Skeleton Archers</h3>
+            <p class="monster-lore">
+              Hollow marksmen that hold mid-range firing lines, unleashing cursed bone arrows that force constant lateral movement.
+            </p>
+            <div class="monster-meta">
+              <div class="monster-weakness"><strong>WEAKNESS:</strong> Rapid Kunai &amp; High-Speed Flanking</div>
+              <div class="defeated-tracker">
+                <span>DEFEATED COUNT</span>
+                <span class="defeated-count" data-defeated="archer">51</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Stage Bosses -->
+          <article class="pixel-card monster-card" data-category="boss">
+            <div class="monster-sprite-box">
+              <span class="threat-badge">THREAT: EXTREME</span>
+              <canvas data-sprite="boss" data-scale="5"></canvas>
+            </div>
+            <h3 class="monster-name">Stage Bosses</h3>
+            <p class="monster-lore">
+              Colossal dread champions that descend at the climax of each stage with massive health pools and radial dark-magic barrages.
+            </p>
+            <div class="monster-meta">
+              <div class="monster-weakness"><strong>WEAKNESS:</strong> Upgraded Crit Builds &amp; I-Frame Dodging</div>
+              <div class="defeated-tracker">
+                <span>DEFEATED COUNT</span>
+                <span class="defeated-count" data-defeated="boss">3</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Special Level Spotlight -->
+        <div class="special-level-banner">
+          <div>
+            <span class="secret-tag">★ SECRET / BONUS STAGE SPOTLIGHT</span>
+            <h3 class="special-title">SPECIAL LEVEL: "RYAN JACOB SOLOMON"</h3>
+            <p class="special-desc">
+              Think you have mastered the Standard Campaign? Unlock the hidden bonus arena <strong>"Ryan Jacob Solomon"</strong>—an elite endurance gauntlet engineered for veteran hunters seeking relentless wave intensity, high-stakes boss pressure, and legendary bragging rights.
+            </p>
+            <button class="btn btn-sm btn-secondary" id="btn-secret-intel" type="button">DECRYPT STAGE INTEL</button>
+          </div>
+
+          <div class="special-intel-box" id="secret-intel-extra" data-revealed="false">
+            <div class="special-intel-row"><span>STAGE CODENAME</span><span>RYAN JACOB SOLOMON</span></div>
+            <div class="special-intel-row"><span>THREAT CLASS</span><span>[ REDACTED — EXTREME ]</span></div>
+            <div class="special-intel-row"><span>REWARD TIER</span><span>MYTHIC TROPHY &amp; GOLD</span></div>
+            <div class="special-intel-row"><span>ACCESS</span><span>POST-CAMPAIGN SECRET</span></div>
+          </div>
+        </div>
+
+        <!-- Village Trophies Tracker -->
+        <div>
+          <div class="trophies-header">
+            <div>
+              <h3 class="panel-heading">VILLAGE TROPHIES TRACKER</h3>
+              <p class="panel-sub" style="margin-bottom:0;">Earn badges during gameplay runs or preview all unlocked trophy emblems.</p>
+            </div>
+            <button class="btn btn-sm btn-gold" id="btn-preview-trophies" type="button">PREVIEW ALL UNLOCKED</button>
+          </div>
+
+          <div class="trophies-grid" id="trophies-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         8. CONTROLS, AUDIO DESIGN & TECHNICAL SPECS
+         ==================================================================== -->
+    <section id="controls" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">PRECISION INPUT &amp; RETRO AUDIO</span>
+          <h2 class="section-title">CONTROLS &amp; SOUNDBOARD</h2>
+          <p class="section-subtitle">
+            Responsive PC keyboard &amp; mouse combat paired with 9 synthesized retro audio categories crafted for crisp combat feedback.
+          </p>
+        </div>
+
+        <div class="controls-audio-grid">
+          <!-- Interactive Visual Keybind Diagram -->
+          <div class="pixel-card keybind-card">
+            <h3 class="panel-heading">VISUAL KEYBIND DIAGRAM</h3>
+            <p class="panel-sub">Click any key below—or press it on your keyboard—to highlight the combat binding.</p>
+
+            <div class="keyboard-visual">
+              <div class="wasd-cluster">
+                <div class="key-row">
+                  <button class="vis-key" data-bind-key="w" data-bind-action="move" type="button">W</button>
+                </div>
+                <div class="key-row">
+                  <button class="vis-key" data-bind-key="a" data-bind-action="move" type="button">A</button>
+                  <button class="vis-key" data-bind-key="s" data-bind-action="move" type="button">S</button>
+                  <button class="vis-key" data-bind-key="d" data-bind-action="move" type="button">D</button>
+                </div>
+                <div class="key-row" style="margin-top:6px;">
+                  <button class="vis-key space-key" data-bind-key="space" data-bind-action="dodge" type="button">SPACEBAR</button>
+                  <button class="vis-key" data-bind-key="m" data-bind-action="radar" type="button">M</button>
+                </div>
+              </div>
+
+              <div class="mouse-graphic" data-bind-key="mouse" data-bind-action="attack" title="Mouse — Aim & Attack" role="button" tabindex="0">
+                <div class="mouse-lmb"></div>
+              </div>
+            </div>
+
+            <div class="keybind-legend">
+              <div class="keybind-item" data-bind-legend="move">
+                <strong>W A S D — MOVE</strong>
+                8-directional top-down movement across the gothic arena.
+              </div>
+              <div class="keybind-item" data-bind-legend="attack">
+                <strong>MOUSE — ATTACK</strong>
+                Precision cursor aim with left-click primary weapon attacks.
+              </div>
+              <div class="keybind-item" data-bind-legend="dodge">
+                <strong>SPACEBAR — DODGE</strong>
+                Quick evasive dash granting brief invulnerability frames.
+              </div>
+              <div class="keybind-item" data-bind-legend="radar">
+                <strong>M — OPEN RADAR</strong>
+                Toggles the tactical mini-radar tracking nearby foes &amp; boss.
+              </div>
+            </div>
+          </div>
+
+          <!-- 9-Category Audio Soundboard Preview -->
+          <div class="pixel-card soundboard-card">
+            <h3 class="panel-heading">AUDIO DESIGN SOUNDBOARD (9 SFX)</h3>
+            <p class="panel-sub">Click any category below to audition Strike of Destiny's synthesized Web Audio SFX.</p>
+
+            <div class="soundboard-grid">
+              <button class="sfx-btn" data-sfx="bullet" type="button">
+                <span class="sfx-idx">01 / PROJ</span>
+                <span class="sfx-label">Bullet SFX</span>
+                <div class="sfx-bars"><span></span><span></span><span></span><span></span></div>
+              </button>
+              <button class="sfx-btn" data-sfx="kunai" type="button">
+                <span class="sfx-idx">02 / SHINOBI</span>
+                <span class="sfx-label">Kunai SFX</span>
+                <div class="sfx-bars"><span></span><span></span><span></span><span></span></div>
+              </button>
+              <button class="sfx-btn" data-sfx="shadow" type="button">
+                <span class="sfx-idx">03 / ABILITY</span>
+                <span class="sfx-label">Shadow Ability SFX</span>
+                <div class="sfx-bars"><span></span><span></span><span></span><span></span></div>
+              </button>
+              <button class="sfx-btn" data-sfx="player" type="button">
+                <span class="sfx-idx">04 / HERO</span>
+                <span class="sfx-label">Player SFX</span>
+                <div class="sfx-bars"><span></span><span></span><span></span><span></span></div>
+              </button>
+              <button class="sfx-btn" data-sfx="enemy" type="button">
+                <span class="sfx-idx">05 / UNDEAD</span>
+                <span class="sfx-label">Enemy SFX</span>
+                <div class="sfx-bars"><span></span><span></span><span></span><span></span></div>
+              </button>
+              <button class="sfx-btn" data-sfx="xp" type="button">
+                <span class="sfx-idx">06 / LOOT</span>
+                <span class="sfx-label">XP Pickup</span>
+                <div class="sfx-bars"><span></span><span></span><span></span><span></span></div>
+              </button>
+              <button class="sfx-btn" data-sfx="levelup" type="button">
+                <span class="sfx-idx">07 / FANFARE</span>
+                <span class="sfx-label">Level-Up</span>
+                <div class="sfx-bars"><span></span><span></span><span></span><span></span></div>
+              </button>
+              <button class="sfx-btn" data-sfx="upgrade" type="button">
+                <span class="sfx-idx">08 / FORGE</span>
+                <span class="sfx-label">Upgrade</span>
+                <div class="sfx-bars"><span></span><span></span><span></span><span></span></div>
+              </button>
+              <button class="sfx-btn" data-sfx="victory" type="button">
+                <span class="sfx-idx">09 / CLEAR</span>
+                <span class="sfx-label">Victory</span>
+                <div class="sfx-bars"><span></span><span></span><span></span><span></span></div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================
+       GAME SPECS & DEV TEAM FOOTER
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4 class="footer-heading">STRIKE OF DESTINY</h4>
+          <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.65;">
+            A dark-fantasy 2D top-down roguelike survival action game where every wave tests your reflexes and every run forges a stronger hunter.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">PLATFORM &amp; TECH SPECS</h4>
+          <ul class="spec-list">
+            <li><strong>Platform:</strong> PC (Windows)</li>
+            <li><strong>Engine &amp; Language:</strong> Unity Engine, C#</li>
+            <li><strong>Mode:</strong> Single-Player Standard Campaign</li>
+            <li><strong>Release Model:</strong> Free Academic Release (No microtransactions)</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">COURSE &amp; DEV TEAM CREDITS</h4>
+          <p style="font-family:var(--font-pixel-alt);font-size:0.74rem;color:var(--cyan);margin-bottom:12px;">
+            Game Development – IT306 (November 2026)
+          </p>
+          <div class="credits-chips">
+            <span class="dev-chip">Asiong, Jared</span>
+            <span class="dev-chip">Ajos, Jenny</span>
+            <span class="dev-chip">Asuncion, Quinn</span>
+            <span class="dev-chip">Artigo, Nierly Gabriel</span>
+            <span class="dev-chip">Mosqueda, Justin</span>
+            <span class="dev-chip">Nirza, Jared Dale</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Strike of Destiny Development Team — IT306 Game Development Showcase.</span>
+        <span>Built for PC (Windows) • Unity &amp; C#</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="sod-toast" role="status" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/sprites.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/demo.js"></script>
+</body>
+</html>
